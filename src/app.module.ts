@@ -6,9 +6,10 @@ import { PrismaModuleModule } from './prisma-module/prisma-module.module';
 import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from 'src/utils/logger.middleware';
 import { AssociationsModule } from './associations/associations.module';
+import { TeamsModule } from './teams/teams.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), PrismaModuleModule, UsersModule, AssociationsModule],
+  imports: [ConfigModule.forRoot(), PrismaModuleModule, UsersModule, AssociationsModule, TeamsModule],
 
   controllers: [AppController],
   providers: [AppService],
