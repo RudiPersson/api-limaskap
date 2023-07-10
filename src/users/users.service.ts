@@ -15,13 +15,34 @@ export class UsersService {
   }
 
   async findAll() {
-    const users = await this.prisma.user.findMany();
+    const users = await this.prisma.user.findMany({
+      include: {
+        association: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            logo: true,
+          },
+        },
+      },
+    });
     return users;
   }
 
   findOne(id: string) {
     const user = this.prisma.user.findUniqueOrThrow({
       where: { id: id },
+      include: {
+        association: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            logo: true,
+          },
+        },
+      },
     });
 
     return user;

@@ -5,9 +5,10 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModuleModule } from './prisma-module/prisma-module.module';
 import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from 'src/utils/logger.middleware';
+import { AssociationsModule } from './associations/associations.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), PrismaModuleModule, UsersModule],
+  imports: [ConfigModule.forRoot(), PrismaModuleModule, UsersModule, AssociationsModule],
 
   controllers: [AppController],
   providers: [AppService],
