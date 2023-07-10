@@ -7,9 +7,10 @@ import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from 'src/utils/logger.middleware';
 import { AssociationsModule } from './associations/associations.module';
 import { TeamsModule } from './teams/teams.module';
+import { MembersModule } from './members/members.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), PrismaModuleModule, UsersModule, AssociationsModule, TeamsModule],
+  imports: [ConfigModule.forRoot(), PrismaModuleModule, UsersModule, AssociationsModule, TeamsModule, MembersModule],
 
   controllers: [AppController],
   providers: [AppService],
