@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id          String       @id @default(cuid())
+  name        String?
+  email       String       @unique
+  password    String
+  association association?
+  createdAt   DateTime     @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime     @updatedAt @db.Timestamptz(6)
+}
+
+model association {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  logo      String?
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+  user      user     @relation(fields: [userId], references: [id])
+  userId    String   @unique
+  teams     team[]
+}
+
+model team {
+  id              String      @id @default(cuid())
+  name            String
+  description     String?
+  email           String?
+  price           Float
+  member_size     Int
+  signup_deadline DateTime    @db.Timestamptz(6)
+  createdAt       DateTime    @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime    @updatedAt @db.Timestamptz(6)
+  association     association @relation(fields: [associationId], references: [id])
+  associationId   String
+  member          member[]
+}
+
+model member {
+  id          String   @id @default(cuid())
+  name        String
+  gender      Gender
+  birthday    DateTime
+  guardian    String?
+  email       String
+  phonenumber String?
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(6)
+  team        team     @relation(fields: [teamId], references: [id])
+  teamId      String
+}
+
+enum Gender {
+  male
+  female
+}
