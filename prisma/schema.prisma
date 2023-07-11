@@ -50,8 +50,6 @@ model team {
 model member {
   id          String   @id @default(cuid())
   name        String
-  gender      Gender
-  birthday    DateTime
   guardian    String?
   email       String
   phonenumber String?
@@ -59,9 +57,4 @@ model member {
   updatedAt   DateTime @updatedAt @db.Timestamptz(6)
   team        team     @relation(fields: [teamId], references: [id])
   teamId      String
-}
-
-enum Gender {
-  male
-  female
 }
