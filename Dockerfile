@@ -28,4 +28,5 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/prisma ./prisma/
 
 
-CMD [ "node", "dist/main.js" ]
+CMD pnpm prisma migrate deploy && node dist/main.js
+# CMD [ "node", "dist/main.js" ]
