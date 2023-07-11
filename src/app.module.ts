@@ -8,9 +8,25 @@ import { LoggerMiddleware } from 'src/utils/logger.middleware';
 import { AssociationsModule } from './associations/associations.module';
 import { TeamsModule } from './teams/teams.module';
 import { MembersModule } from './members/members.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './auth/constants';
 
 @Module({
-  imports: [ConfigModule.forRoot(), PrismaModuleModule, UsersModule, AssociationsModule, TeamsModule, MembersModule],
+  imports: [
+    ConfigModule.forRoot(),
+    PrismaModuleModule,
+    UsersModule,
+    AssociationsModule,
+    TeamsModule,
+    MembersModule,
+    AuthModule,
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '60s' },
+    }),
+  ],
 
   controllers: [AppController],
   providers: [AppService],
