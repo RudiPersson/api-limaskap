@@ -10,6 +10,7 @@ import {
 import { AssociationsService } from './associations.service';
 import { CreateAssociationDto } from './dto/create-association.dto';
 import { UpdateAssociationDto } from './dto/update-association.dto';
+import { Public } from 'src/auth/public.decorator';
 
 @Controller({
   path: 'associations',
@@ -23,11 +24,13 @@ export class AssociationsController {
     return this.associationsService.create(createAssociationDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.associationsService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.associationsService.findOne(id);

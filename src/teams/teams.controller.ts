@@ -10,6 +10,7 @@ import {
 import { TeamsService } from './teams.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
+import { Public } from 'src/auth/public.decorator';
 
 @Controller({
   path: 'teams',
@@ -23,11 +24,13 @@ export class TeamsController {
     return this.teamsService.create(createTeamDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.teamsService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.teamsService.findOne(id);
