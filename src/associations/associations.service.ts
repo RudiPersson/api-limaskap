@@ -35,6 +35,17 @@ export class AssociationsService {
     return association;
   }
 
+  findOneWhereUser(userId: string) {
+    const association = this.prisma.association.findUniqueOrThrow({
+      where: { userId: userId },
+      include: {
+        teams: true,
+      },
+    });
+
+    return association;
+  }
+
   update(id: string, updateAssociationDto: UpdateAssociationDto) {
     const association = this.prisma.association.update({
       where: { id: id },

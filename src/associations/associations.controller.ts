@@ -36,6 +36,11 @@ export class AssociationsController {
     return this.associationsService.findOne(id);
   }
 
+  @Get('user/:userId')
+  findOneWhereUser(@Param('userId') userId: string) {
+    return this.associationsService.findOneWhereUser(userId);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,
