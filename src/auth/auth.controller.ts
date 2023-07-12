@@ -16,4 +16,10 @@ export class AuthController {
   signIn(@Body() signInDto: signInDto) {
     return this.authService.signIn(signInDto.email, signInDto.password);
   }
+
+  @Public()
+  @Post('next-auth-login')
+  nextAuthLogin(@Body() signInDto: signInDto) {
+    return this.authService.nextAuthLogin(signInDto.email, signInDto.password);
+  }
 }
