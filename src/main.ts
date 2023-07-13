@@ -13,6 +13,7 @@ async function bootstrap() {
   const logger = new Logger('Main (main.ts)');
   const app = await NestFactory.create(AppModule);
   const { httpAdapter } = app.get(HttpAdapterHost);
+  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
