@@ -26,6 +26,16 @@ export class TeamsService {
     return team;
   }
 
+  findOneWithMembers(id: string) {
+    const team = this.prisma.team.findUniqueOrThrow({
+      where: { id },
+      include: {
+        member: true,
+      },
+    });
+    return team;
+  }
+
   update(id: string, updateTeamDto: UpdateTeamDto) {
     const team = this.prisma.team.update({
       where: { id },
