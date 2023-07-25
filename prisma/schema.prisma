@@ -54,7 +54,7 @@ model team {
   signup_deadline DateTime    @db.Timestamptz(6)
   createdAt       DateTime    @default(now()) @db.Timestamptz(6)
   updatedAt       DateTime    @updatedAt @db.Timestamptz(6)
-  association     association @relation(fields: [associationId], references: [id])
+  association     association @relation(fields: [associationId], references: [id], onDelete: Cascade)
   associationId   String
   member          member[]
 }
@@ -67,6 +67,6 @@ model member {
   phonenumber String?
   createdAt   DateTime @default(now()) @db.Timestamptz(6)
   updatedAt   DateTime @updatedAt @db.Timestamptz(6)
-  team        team     @relation(fields: [teamId], references: [id])
+  team        team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
   teamId      String
 }
