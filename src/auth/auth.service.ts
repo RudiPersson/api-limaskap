@@ -16,6 +16,7 @@ export class AuthService {
     private prisma: PrismaModuleService,
   ) {}
 
+  // This method is use by Insomnia. It's not use by the frontend.
   async signIn(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findOneByEmail(email);
     if (user?.password !== pass) {
@@ -29,6 +30,7 @@ export class AuthService {
     };
   }
 
+  // This method is use by the frontend.
   async nextAuthLogin(email: string, password: string) {
     const user = await this.prisma.user.findUnique({
       where: { email: email },

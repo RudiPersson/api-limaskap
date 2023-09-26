@@ -15,7 +15,11 @@ export class TeamsService {
   }
 
   findAll() {
-    const teams = this.prisma.team.findMany();
+    const teams = this.prisma.team.findMany({
+      include: {
+        association: true,
+      },
+    });
     return teams;
   }
 

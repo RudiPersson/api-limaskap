@@ -18,6 +18,7 @@ export class AuthController {
   }
 
   @Public()
+  @HttpCode(HttpStatus.OK)
   @Post('next-auth-login')
   nextAuthLogin(@Body() signInDto: signInDto) {
     return this.authService.nextAuthLogin(signInDto.email, signInDto.password);
